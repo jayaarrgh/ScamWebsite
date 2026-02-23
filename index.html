@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scam Website | Trust Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 255, 100, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 200, 80, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.03) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-5%, -5%) rotate(5deg);
+            }
+        }
+
+        .money-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(rgba(34, 197, 94, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.5) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            filter: blur(30px);
+            will-change: transform;
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(34, 197, 94, 0.7);
+            border-radius: 50%;
+            animation: fall linear infinite;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 0 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .particle.money {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-money {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.5));
+            transition: transform 0.3s ease-out;
+            will-change: transform;
+        }
+
+        .floating-money::after {
+            content: '';
+            position: absolute;
+            animation: floatMoneyPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes floatMoneyPulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            perspective: 1500px;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            perspective: 1000px;
+            will-change: transform;
+            transition: transform 0.15s ease-out;
+        }
+
+        .logo {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(34, 197, 94, 0.5);
+            margin-bottom: 20px;
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            25% { transform: translateY(-5px) rotateY(5deg); }
+            75% { transform: translateY(-5px) rotateY(-5deg); }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #22c55e 50%, #16a34a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: titleFloat 8s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: perspective(500px) rotateX(0deg) rotateY(0deg); text-shadow: 0 0 0 transparent; }
+            25% { transform: perspective(500px) rotateX(3deg) rotateY(-5deg); }
+            50% { transform: perspective(500px) rotateX(-2deg) rotateY(5deg); }
+            75% { transform: perspective(500px) rotateX(2deg) rotateY(-3deg); }
+        }
+
+        .warning-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #fca5a5;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .warning-badge:hover {
+            transform: perspective(300px) rotateX(10deg) rotateY(-10deg) scale(1.1);
+            box-shadow: 0 0 30px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 5px rgba(239, 68, 68, 0.15);
+            }
+        }
+
+        .hero-text {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-text strong {
+            color: #22c55e;
+        }
+
+        .consent-text {
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            background: rgba(34, 197, 94, 0.02);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(-45deg) rotateX(15deg) translateX(-200px) translateZ(-150px) scale(0.7);
+            opacity: 0;
+        }
+
+        .section.visible {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateX(0) translateZ(0) scale(1);
+            opacity: 1;
+        }
+
+        .section.slide-right {
+            transform: perspective(1000px) rotateY(45deg) rotateX(-15deg) translateX(200px) translateZ(-150px) scale(0.7) skewY(5deg);
+        }
+
+        .section.slide-right.visible {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateX(0) translateZ(0) scale(1) skewY(0deg);
+        }
+
+        .section.spin-in {
+            transform: perspective(1000px) rotateY(180deg) rotateZ(45deg) translateY(-150px) scale(0.3);
+        }
+
+        .section.spin-in.visible {
+            transform: perspective(1000px) rotateY(0deg) rotateZ(0deg) translateY(0) scale(1);
+        }
+
+        .section.flip-top {
+            transform: perspective(1000px) rotateX(-90deg) translateY(-200px) rotateZ(-20deg) scale(0.5);
+        }
+
+        .section.flip-top.visible {
+            transform: perspective(1000px) rotateX(0deg) translateY(0) rotateZ(0deg) scale(1);
+        }
+
+        .section:hover {
+            background: rgba(34, 197, 94, 0.04);
+            border-color: rgba(34, 197, 94, 0.2);
+            transform: perspective(1000px) rotateY(3deg) rotateX(-2deg) scale(1.02);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 2px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature-list li::before {
+            content: '$';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .testimonials-section {
+            perspective: 2000px;
+            margin-bottom: 30px;
+        }
+
+        .testimonials-card {
+            background: rgba(34, 197, 94, 0.02);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+            transform: perspective(1500px) rotateY(-90deg) rotateX(30deg) translateZ(-300px) scale(0.5);
+            opacity: 0;
+        }
+
+        .testimonials-card.flipped {
+            transform: perspective(1500px) rotateY(0deg) rotateX(0deg) translateZ(0) scale(1);
+            opacity: 1;
+        }
+
+        .testimonials-card:hover {
+            transform: perspective(1500px) rotateY(-8deg) rotateX(5deg) rotateZ(2deg) scale(1.03);
+            box-shadow: -30px 30px 80px rgba(34, 197, 94, 0.15);
+        }
+
+        .testimonials {
+            display: grid;
+            gap: 20px;
+        }
+
+        .testimonial {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(34, 197, 94, 0.05);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .testimonial:hover {
+            transform: translateX(15px) rotateY(-5deg) rotateX(3deg) scale(1.03);
+            border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 10px 10px 30px rgba(34, 197, 94, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-size: 0.85rem;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .disclaimer {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.02));
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .disclaimer h2::before {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+        }
+
+        .disclaimer-list {
+            list-style: none;
+        }
+
+        .disclaimer-list li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .disclaimer-list li::before {
+            content: '⚠ ';
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+            perspective: 1000px;
+            will-change: transform;
+            transition: transform 0.15s ease-out;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            animation: ctaPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .cta-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: ctaFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes ctaFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(5deg); }
+        }
+
+        .cta-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 30px;
+            animation: ctaFloat 4s ease-in-out infinite 0.5s;
+        }
+
+        .buy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #000;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.3);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .buy-button:hover::before {
+            left: 100%;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(34, 197, 94, 0.4);
+        }
+
+        .buy-button:active {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .buy-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .guarantee-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(34, 197, 94, 0.05);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .badge-icon {
+            font-size: 1.2rem;
+        }
+
+        .parallax-element {
+            position: fixed;
+            font-size: 4rem;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 1;
+            transition: none;
+            text-shadow: 0 0 50px rgba(34, 197, 94, 0.5);
+            filter: blur(1px);
+            will-change: transform;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 15px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .guarantee-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonials-card:hover {
+                transform: rotateY(0deg) scale(1.02);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="money-grid"></div>
+    <div class="particles" id="particles"></div>
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <div class="parallax-element" id="parallax1" style="top: 20%; left: 5%; font-size: 6rem;">$</div>
+    <div class="parallax-element" id="parallax2" style="top: 50%; right: 5%; font-size: 5rem;">€</div>
+    <div class="parallax-element" id="parallax3" style="top: 80%; left: 10%; font-size: 4rem;">£</div>
+    <div class="parallax-element" id="parallax4" style="top: 30%; right: 15%; font-size: 7rem;">¥</div>
+    <div class="parallax-element" id="parallax5" style="top: 60%; left: 20%; font-size: 5rem;">₿</div>
+
+    <div class="floating-money" style="top: 15%; left: 80%;">💵</div>
+    <div class="floating-money" style="top: 70%; left: 10%; animation-delay: -5s;">💰</div>
+    <div class="floating-money" style="top: 40%; left: 85%; animation-delay: -10s;">💸</div>
+    <div class="floating-money" style="top: 25%; left: 15%; animation-delay: -3s;">💵</div>
+    <div class="floating-money" style="top: 85%; left: 75%; animation-delay: -7s;">💎</div>
+    <div class="floating-money" style="top: 55%; left: 5%; animation-delay: -12s;">🪙</div>
+
+    <div class="container">
+        <header>
+            <div class="logo">Est. 2026</div>
+            <h1>Scam Website</h1>
+            <span class="warning-badge">This is definitely a scam</span>
+        </header>
+
+        <p class="hero-text">
+            If it wasn't a scam, it definitely wouldn't be trying to convince you that it is a scam. Would it? We offer
+            a <strong>99% No Money Back Guarantee</strong> and a <strong>0% offer of anything else</strong>.
+        </p>
+
+        <p class="consent-text">
+            By continuing, you consent to participate in a mutually ambiguous transaction whose ethical validity is
+            theoretically undecidable.
+        </p>
+
+        <div class="section" data-animate>
+            <h2>How It Works</h2>
+            <ul class="feature-list">
+                <li>You buy the product, and you don't get to know what I'm going to spend it on. That's piece of mind
+                    that costs nothing extra!</li>
+                <li>If you did purchase, the money is simultaneously spent and unspent, in accordance with the principle
+                    of quantum finance.</li>
+            </ul>
+        </div>
+
+        <div class="section slide-right" data-animate>
+            <h2>Why Trust Us</h2>
+            <ul class="feature-list">
+                <li>Because in spending money, you may discover the true meaning of "value," which, by definition, has
+                    no fixed definition.</li>
+                <li>Because trust is a social construct, and social constructs are inherently scammy.</li>
+                <li>Because someone has to test the limits of human gullibility.</li>
+                <li>We openly admit this is a scam.</li>
+            </ul>
+        </div>
+
+        <div class="testimonials-section">
+            <div class="testimonials-card" id="testimonialsCard">
+                <h2>Testimonials</h2>
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I gave them $5. Nothing happened. Still feels good."</p>
+                        <span class="testimonial-author">— John Dough</span>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I sent $20. I am both richer and poorer for it."</p>
+                        <span class="testimonial-author">— Erwin Dillinger</span>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I asked for a refund, but they said I needed a monthly subscription
+                            to be in the refund tier."</p>
+                        <span class="testimonial-author">— Anonymous</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3 class="cta-title">Ready to Embrace the Ambiguity?</h3>
+            <p class="cta-subtitle">Your participation in this grand ontological experiment awaits.</p>
+
+            <a href="https://www.paypal.com/donate" target="_blank" rel="noopener noreferrer" class="buy-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                Send Money Now
+            </a>
+
+            <div class="guarantee-badges">
+                <div class="badge">
+                    <span class="badge-icon">🚫</span>
+                    <span>99% No Money Back</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">⚡</span>
+                    <span>Quantum Finance</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">🎭</span>
+                    <span>Ethically Undecidable</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section disclaimer spin-in" data-animate>
+            <h2>Disclaimer</h2>
+            <ul class="disclaimer-list">
+                <li>We are not responsible for your bad financial decisions.</li>
+                <li>By sending money, you may inadvertently participate in a grand ontological experiment.</li>
+                <li>This is a scam. Don't be surprised.</li>
+            </ul>
+        </div>
+
+        <footer>
+            © 2026 Scam Website. All rights reserved. Or none. It's ambiguous.
+        </footer>
+    </div>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 60; i++) {
+            const particle = document.createElement('div');
+            const isMoney = Math.random() > 0.7;
+            particle.className = isMoney ? 'particle money' : 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+            if (isMoney) {
+                particle.style.width = (8 + Math.random() * 12) + 'px';
+                particle.style.height = (4 + Math.random() * 6) + 'px';
+            } else {
+                particle.style.width = (2 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+            }
+            particlesContainer.appendChild(particle);
+        }
+
+        const parallaxElements = [
+            { el: document.getElementById('parallax1'), speedY: 0.3, speedRotate: 0.05 },
+            { el: document.getElementById('parallax2'), speedY: 0.5, speedRotate: -0.08 },
+            { el: document.getElementById('parallax3'), speedY: 0.4, speedRotate: 0.06 },
+            { el: document.getElementById('parallax4'), speedY: 0.6, speedRotate: -0.04 },
+            { el: document.getElementById('parallax5'), speedY: 0.35, speedRotate: 0.07 }
+        ];
+
+        window.addEventListener('scroll', () => {
+            updateParallax();
+        });
+
+        function updateParallax() {
+            const scrollY = window.scrollY;
+            const rotateX = (mouseY - 0.5) * -20;
+            const rotateY = (mouseX - 0.5) * 20;
+
+            parallaxElements.forEach(({ el, speedY, speedRotate }) => {
+                const yOffset = scrollY * speedY;
+                const rotation = scrollY * speedRotate;
+                const mouseRotateX = rotateX * 0.1;
+                const mouseRotateY = rotateY * 0.1;
+                el.style.transform = `translateY(${yOffset}px) rotate(${rotation}deg) rotateX(${mouseRotateX}deg) rotateY(${mouseRotateY}deg) scale(${1 + scrollY * 0.0002})`;
+            });
+        }
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section[data-animate]').forEach(section => {
+            observer.observe(section);
+        });
+
+        const testimonialsCard = document.getElementById('testimonialsCard');
+        const testimonialsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('flipped');
+                } else {
+                    entry.target.classList.remove('flipped');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        testimonialsObserver.observe(testimonialsCard);
+
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let targetMouseX = 0.5;
+        let targetMouseY = 0.5;
+
+        document.addEventListener('mousemove', (e) => {
+            targetMouseX = e.clientX / window.innerWidth;
+            targetMouseY = e.clientY / window.innerHeight;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                targetMouseX = e.touches[0].clientX / window.innerWidth;
+                targetMouseY = e.touches[0].clientY / window.innerHeight;
+            }
+        });
+
+        function animate3D() {
+            mouseX += (targetMouseX - mouseX) * 0.08;
+            mouseY += (targetMouseY - mouseY) * 0.08;
+
+            const rotateX = (mouseY - 0.5) * -30;
+            const rotateY = (mouseX - 0.5) * 30;
+
+            const mouseGlow = document.getElementById('mouseGlow');
+            mouseGlow.style.left = (mouseX * window.innerWidth) + 'px';
+            mouseGlow.style.top = (mouseY * window.innerHeight) + 'px';
+            mouseGlow.style.opacity = Math.abs(mouseX - 0.5) + Math.abs(mouseY - 0.5) > 0.1 ? 1 : 0.5;
+
+            updateParallax();
+
+            const container = document.querySelector('.container');
+            container.style.transform = `perspective(2000px) rotateX(${rotateX * 0.05}deg) rotateY(${rotateY * 0.05}deg)`;
+
+            document.querySelectorAll('.section.visible').forEach((section, index) => {
+                const intensity = 0.3 + (index * 0.1);
+                section.style.transform = `perspective(1000px) rotateX(${rotateX * intensity}deg) rotateY(${rotateY * intensity}deg) scale(1)`;
+            });
+
+            const testimonialsCard = document.getElementById('testimonialsCard');
+            if (testimonialsCard.classList.contains('flipped')) {
+                testimonialsCard.style.transform = `perspective(1500px) rotateX(${rotateX * 0.4 + 5}deg) rotateY(${rotateY * 0.4 - 8}deg) rotateZ(${(mouseX - 0.5) * 3}deg) scale(1.03)`;
+            }
+
+            const header = document.querySelector('header');
+            header.style.transform = `perspective(1000px) rotateX(${rotateX * 0.15}deg) rotateY(${rotateY * 0.15}deg)`;
+
+            const warningBadge = document.querySelector('.warning-badge');
+            if (warningBadge) {
+                warningBadge.style.transform = `perspective(300px) rotateX(${rotateX * 0.2}deg) rotateY(${rotateY * 0.2}deg) translateZ(20px)`;
+            }
+
+            const ctaTitle = document.querySelector('.cta-title');
+            if (ctaTitle) {
+                ctaTitle.style.transform = `translateY(${Math.sin(Date.now() / 1000) * 10}px) rotateX(${rotateX * 0.2}deg) rotateY(${rotateY * 0.2}deg)`;
+            }
+
+            const buyButton = document.querySelector('.buy-button');
+            if (buyButton) {
+                buyButton.style.transform = `perspective(500px) rotateX(${rotateX * 0.15}deg) rotateY(${rotateY * 0.15}deg) translateY(-3px) scale(1.02)`;
+            }
+
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) {
+                ctaSection.style.transform = `perspective(1000px) rotateX(${rotateX * 0.08}deg) rotateY(${rotateY * 0.08}deg)`;
+            }
+
+            document.querySelectorAll('.floating-money').forEach((el, i) => {
+                const speed = 20 + i * 5;
+                const floatOffset = Math.sin(Date.now() / 2000 + i) * 20;
+                el.style.transform = `translate(${(mouseX - 0.5) * speed}px, ${(mouseY - 0.5) * speed + floatOffset}px) rotate(${(mouseX - 0.5) * 15}deg) scale(${1 + Math.sin(Date.now() / 1500 + i) * 0.1})`;
+            });
+
+            requestAnimationFrame(animate3D);
+        }
+
+        animate3D();
+
+        document.querySelectorAll('.section[data-animate]').forEach(section => {
+            section.addEventListener('mousemove', (e) => {
+                const rect = section.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                const isDisclaimer = section.classList.contains('disclaimer');
+                const color = isDisclaimer ? '239, 68, 68' : '34, 197, 94';
+
+                section.style.boxShadow = `
+                    ${-x * 30}px ${y * 30}px 60px rgba(${color}, 0.2),
+                    ${x * 10}px ${-y * 10}px 30px rgba(${color}, 0.15),
+                    inset ${x * 20}px ${y * 20}px 40px rgba(${color}, 0.05)
+                `;
+
+                section.style.transform = `perspective(1000px) rotateX(${y * -15}deg) rotateY(${x * 15}deg) scale(1.01)`;
+            });
+
+            section.addEventListener('mouseleave', () => {
+                section.style.boxShadow = 'none';
+            });
+        });
+
+        document.querySelectorAll('.testimonial').forEach(testimonial => {
+            testimonial.addEventListener('mousemove', (e) => {
+                const rect = testimonial.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                testimonial.style.transform = `
+                    translateX(15px) 
+                    perspective(500px) 
+                    rotateX(${y * -20}deg) 
+                    rotateY(${x * 20}deg) 
+                    translateZ(${Math.abs(x) * 20 + Math.abs(y) * 20}px)
+                    scale(1.05)
+                `;
+                testimonial.style.boxShadow = `${x * -15}px ${y * 15}px 30px rgba(34, 197, 94, 0.2)`;
+            });
+
+            testimonial.addEventListener('mouseleave', () => {
+                testimonial.style.transform = 'translateX(0) perspective(500px) rotateX(0) rotateY(0) scale(1)';
+                testimonial.style.boxShadow = 'none';
+            });
+        });
+
+        document.querySelectorAll('.badge').forEach(badge => {
+            badge.addEventListener('mousemove', (e) => {
+                const rect = badge.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                badge.style.transform = `
+                    perspective(300px) 
+                    rotateX(${y * -25}deg) 
+                    rotateY(${x * 25}deg) 
+                    translateZ(10px)
+                    scale(1.1)
+                `;
+                badge.style.background = `rgba(34, 197, 94, ${0.1 + Math.abs(x) * 0.1})`;
+                badge.style.borderColor = `rgba(34, 197, 94, ${0.2 + Math.abs(x) * 0.2})`;
+            });
+
+            badge.addEventListener('mouseleave', () => {
+                badge.style.transform = 'none';
+                badge.style.background = 'rgba(34, 197, 94, 0.05)';
+                badge.style.borderColor = 'rgba(34, 197, 94, 0.1)';
+            });
+        });
+
+        document.querySelector('.buy-button').addEventListener('mousemove', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            e.target.style.background = `linear-gradient(${135 + x * 30}deg, #22c55e 0%, #16a34a 100%)`;
+        });
+    </script>
+</body>
+
+</html>
